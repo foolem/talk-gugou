@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  published_at: 2020-09-26 19:29:35
+  latitude: 1.5
+  longitude: 1.5
+  stars: 1
+  subject: one
+
+two:
+  title: MyString
+  description: MyText
+  published_at: 2020-09-26 19:29:35
+  latitude: 1.5
+  longitude: 1.5
+  stars: 1
+  subject: two
