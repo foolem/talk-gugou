@@ -9,20 +9,17 @@ class WebsitesController < ApplicationController
   private
 
     def set_search
-      @search ||= Searching::Website.new(website_params[:term], website_params[:query]).call
+      @search ||= Searching::Website.new(params[:term], params[:query]).call
     end
 
     def search_payload
       {
         results: @search.results,
-        total: @search.aggs['id']['sum_other_doc_count'],
+        total: @search.total_count,
+        stars_avg: @search.aggs['stars_avg']['value'].to_i,
         oldest: @search.aggs['oldest']['value_as_string'],
         newest: @search.aggs['newest']['value_as_string'],
         subjects_count: @search.aggs['subject_id']['buckets'].count,
       }
-    end
-
-    def website_params
-      params.require(:website).permit(:term, query: {})
     end
 end

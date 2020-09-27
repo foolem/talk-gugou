@@ -2,13 +2,13 @@ module Searching
   class Website
     attr_reader :term, :query
 
-    def initialize(term = '*', query = {})
-      @term = term
-      @query = query
+    def initialize(term, query)
+      @term = term || '*'
+      @query = query || {}
     end
 
     def call
-      ::Website.search(term, where: query, aggs: aggs, per_page: 50)
+      ::Website.search(term, where: query, aggs: aggs,  body_options: {track_total_hits: true}, per_page: 50)
     end
 
     private
