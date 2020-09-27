@@ -1,11 +1,11 @@
 class Website < ApplicationRecord
-  searchkick settings: { index: { max_result_window: 500_000 } }, locations: [:location]
+  searchkick settings: { index: { max_result_window: 500_000 } }
 
   belongs_to :subject
 
   def search_data
     attributes.merge(
-      location: { lat: latitude, lon: longitude }
+      subject_name: subject.name
     )
   end
 end

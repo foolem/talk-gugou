@@ -25,8 +25,6 @@ ActiveRecord::Schema.define(version: 2020_09_26_222935) do
     t.string "title"
     t.text "description"
     t.datetime "published_at"
-    t.float "latitude"
-    t.float "longitude"
     t.integer "stars"
     t.bigint "subject_id", null: false
     t.datetime "created_at", precision: 6, null: false
