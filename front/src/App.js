@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
+import Star from "@material-ui/icons/Star";
+import StarBorder from "@material-ui/icons/StarBorder";
 
 import { Logo, Input, Item, padding, marginBottom } from "./styles";
 
@@ -119,6 +121,13 @@ export default () => {
             <Typography variant="subtitle1">
               <b>{item.title}</b>
             </Typography>
+            <Grid container direction="row" alignItems="cenbter">
+              {Array(5)
+                .fill()
+                .map((_item, index) =>
+                  index <= item.stars ? <Star /> : <StarBorder />
+                )}
+            </Grid>
             <Typography variant="body1">{item.description}</Typography>
           </Item>
         ))}
