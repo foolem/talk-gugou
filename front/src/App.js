@@ -123,6 +123,7 @@ export default () => {
           options={result.results}
           getOptionLabel={(option) => option.title}
           renderInput={(params) => <TextField {...params} variant="outlined" />}
+          placeholder="Busque por sites"
           inputValue={search.term}
           onInputChange={(_e, v) => {
             setSearch((prevSearch) => ({
