@@ -3,6 +3,9 @@ import axios from "axios";
 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Star from "@material-ui/icons/Star";
@@ -27,6 +30,8 @@ export default () => {
     subjects_count: 0,
   });
 
+  const [subjects, setSubjects] = useState([]);
+
   const handleSearch = async () => {
     const response = await axios.post(`${BASE_URL}/websites`, {
       term: search.term,
@@ -36,13 +41,20 @@ export default () => {
     setResult(response.data);
   };
 
+  const getSubjects = async () => {
+    const response = await axios.get(`${BASE_URL}/subjects`);
+
+    setSubjects(response.data);
+  };
+
   useEffect(() => {
     handleSearch();
+    getSubjects();
   }, []);
 
   useEffect(() => {
     handleSearch();
-  }, [search.term]);
+  }, [search]);
 
   return (
     <Grid container justify="center" alignItems="center" style={padding}>
@@ -99,7 +111,13 @@ export default () => {
         </Grid>
       </Grid>
 
-      <Grid item container justify="center">
+      <Grid
+        item
+        container
+        justify="center"
+        alignItems="center"
+        style={{ marginBottom: "4em" }}
+      >
         <Input
           freeSolo
           options={result.results}
@@ -113,6 +131,28 @@ export default () => {
             }));
           }}
         />
+
+        <Grid style={{ marginLeft: "1em" }}>
+          <InputLabel>Assunto</InputLabel>
+          <Select
+            variant="outlined"
+            value={search.query?.subject_name || ""}
+            onChange={(e) =>
+              setSearch((prevSearch) => ({
+                ...prevSearch,
+                query: !e.target.value ? {} : { subject_name: e.target.value },
+              }))
+            }
+            style={{ minWidth: "15em" }}
+          >
+            <MenuItem value={null}>Nenhum</MenuItem>
+            {subjects.map((item) => (
+              <MenuItem key={item.id} value={item.name}>
+                {item.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
       </Grid>
 
       <Grid item container direction="column">

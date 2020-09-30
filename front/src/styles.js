@@ -11,7 +11,6 @@ export const Logo = styled.img`
 
 export const Input = styled(Autocomplete)`
   width: 15em;
-  margin-bottom: 2em;
 `;
 
 export const Item = styled(Grid)`
